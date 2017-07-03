@@ -24,3 +24,5 @@ django-influxdb-metrics
 django-timezone-field
 raven
 responses
+channels
+asgi_redis
