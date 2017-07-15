@@ -18,11 +18,13 @@ from django.conf.urls import include, url
 
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from graphene_django.views import GraphQLView
 
 from rest_framework_nested import routers
 from rest_framework_swagger.views import get_swagger_view
 
 from foodsaving.history.api import HistoryViewSet
+from foodsaving.schema import schema
 from foodsaving.userauth.api import AuthViewSet
 from foodsaving.conversations.api import ChatViewSet, ChatMessageViewSet
 from foodsaving.groups.api import GroupViewSet
@@ -58,6 +60,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^docs/', get_swagger_view()),
+    url(r'^graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
 ]
 
 if settings.DEBUG:

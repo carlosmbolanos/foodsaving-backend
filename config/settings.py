@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'timezone_field',
     'raven.contrib.django.raven_compat',
     'django_jinja',
+    'graphene_django',
 )
 
 
