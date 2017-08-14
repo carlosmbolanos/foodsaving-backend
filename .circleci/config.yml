@@ -11,7 +11,7 @@ jobs:
           name: install packages
           command: |
             set -x
-            apt-get update -qq && apt-get install -y docker curl
+            apt-get update -qq && apt-get install -y docker
             /usr/local/bin/pip install virtualenv
             virtualenv --no-site-packages ~/env
             ~/env/bin/pip install docker-compose
@@ -30,7 +30,7 @@ jobs:
             set -x
             cd ~/foodsaving-docker
             ~/env/bin/docker-compose up -d
-            curl --retry 10 --retry-connrefused http://localhost:8000
+            ~/foodsaving-docker/docker/wait/wait-for-it -q -t 0 backend:8000
       - run:
           name: Run backend tests
           command: ~/env/bin/docker-compose exec backend ./manage.py test
