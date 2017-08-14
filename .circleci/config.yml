@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/foodsaving-backend
+    docker:
+      - image: python:3.5.3
+      - image: postgres:9.6.3
+      - image: redis:3.0.7-alpine
+    steps:
+      - checkout
+      - run:
+          name: setup
+          command: |
+            set -x
+            cp config/local_settings.py.ci config/local_settings.py
+            command -v virtualenv || /usr/local/bin/pip install virtualenv
+            test -d env/bin || virtualenv --no-site-packages env
+            test -f env/bin/pip-sync || env/bin/pip install pip-tools
+            env/bin/pip-sync
+      - run: env/bin/coverage run manage.py test
+      - run: env/bin/flake8 ./
+      - run:
+          name: collect
+          command: |
+            set -x
+            env/bin/coverage html -d $CIRCLE_ARTIFACTS
+            env/bin/pip install codecov && codecov
+            if [ $CIRCLE_BRANCH ]; then bash trigger_e2e_build.sh; fi
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" || "${CIRCLE_BRANCH}" == "master" ];
+              then echo "deploy"; #./deploy.sh;
+            fi
