@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    #working_directory: ~/foodsaving
+    working_directory: ~/foodsaving-backend
     docker:
       - image: docker/compose:1.11.2
     steps:
