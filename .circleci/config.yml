@@ -12,7 +12,7 @@ jobs:
           name: database init
           command: |
             set -x
-            sudo -u postgres psql -p 5433 -c "create user ubuntu with password ‘ubuntu’;”
+            sudo -u postgres psql -p 5433 -c "create user ubuntu with password 'ubuntu';”
             sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;"
             sudo -u postgres psql -p 5433 -c "create database test;"
       - run:
