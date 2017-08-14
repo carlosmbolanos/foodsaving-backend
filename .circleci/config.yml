@@ -14,7 +14,7 @@ jobs:
             apt-get update -qq && apt-get install -y git docker
             /usr/local/bin/pip install virtualenv
             virtualenv --no-site-packages ~/env
-            env/bin/pip install docker-compose
+            ~/env/bin/pip install docker-compose
       - run:
           name: clone other repos
           command: |
