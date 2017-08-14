@@ -3,9 +3,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fstool_e2etest',
         'TEST': {
-            'NAME': 'will_be_created'
+            'NAME': 'db'
         },
-        'USER': 'ubuntu',
+        'USER': 'db',
+        'PASSWORD': 'db'
     }
 }
 
