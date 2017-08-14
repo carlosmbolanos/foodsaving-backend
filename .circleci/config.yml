@@ -11,7 +11,7 @@ jobs:
           name: install packages
           command: |
             set -x
-            apk --no-cache add git docker
+            apt-get update -qq && apt-get install -y git docker
             virtualenv --no-site-packages ~/env
             env/bin/pip install docker-compose
       - run:
