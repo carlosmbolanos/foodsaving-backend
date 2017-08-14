@@ -11,6 +11,11 @@ jobs:
           name: Start compose containers
           command: |
             set -x
+            cd ~
+            git clone https://github.com/yunity/foodsaving-docker
+            mv foodsaving-backend foodsaving-docker/
+            cd foodsaving-docker
+            git clone https://github.com/yunity/foodsaving-frontend.git
             docker-compose up -d
       - run:
           name: Run backend tests
