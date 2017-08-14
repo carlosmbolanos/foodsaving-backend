@@ -3,21 +3,23 @@ jobs:
   build:
     working_directory: ~/foodsaving-backend
     docker:
-      - image: docker/compose:1.11.2
+      - image: longankoester/docker-compose-image
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: Start compose containers
+          name: clone other repos
           command: |
             set -x
-            apt-get update -qq
-            apt-get install -y git
             cd ~
             git clone https://github.com/yunity/foodsaving-docker
             mv foodsaving-backend foodsaving-docker/
             cd foodsaving-docker
-            git clone https://github.com/yunity/foodsaving-frontend.git
+            git clone https://github.com/yunity/foodsaving-frontend
+      - run:
+          name: Start compose containers
+          command: |
+            set -x
             docker-compose up -d
       - run:
           name: Run backend tests
