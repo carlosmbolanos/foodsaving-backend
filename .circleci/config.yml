@@ -28,7 +28,7 @@ jobs:
           name: compose
           command: |
             set -x
-            docker-compose up -d
+            ~/env/bin/docker-compose up -d
       - run:
           name: Run backend tests
           command: docker-compose exec backend ./manage.py test
