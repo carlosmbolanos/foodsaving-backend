@@ -11,6 +11,8 @@ jobs:
           name: Start compose containers
           command: |
             set -x
+            apt-get update -qq
+            apt-get install -y git
             cd ~
             git clone https://github.com/yunity/foodsaving-docker
             mv foodsaving-backend foodsaving-docker/
