@@ -8,13 +8,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-        name: Start compose containers
-        command: |
-          set -x
-          docker-compose up -d
+          name: Start compose containers
+          command: |
+            set -x
+            docker-compose up -d
       - run:
-        name: Run backend tests
-        command: docker-compose exec backend ./manage.py test
+          name: Run backend tests
+          command: docker-compose exec backend ./manage.py test
 
 
 
