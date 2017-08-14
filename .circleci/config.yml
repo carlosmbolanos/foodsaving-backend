@@ -3,14 +3,17 @@ jobs:
   build:
     working_directory: ~/foodsaving-backend
     docker:
-      - image: docker/compose:1.11.2
-        command: /bin/sh
+      - image: python:3.5.3
     steps:
       - checkout
       - setup_remote_docker
       - run:
-          name: install git
-          command: apk --no-cache add git
+          name: install packages
+          command: |
+            set -x
+            apk --no-cache add git docker
+            virtualenv --no-site-packages ~/env
+            env/bin/pip install docker-compose
       - run:
           name: clone other repos
           command: |
