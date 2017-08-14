@@ -28,6 +28,7 @@ jobs:
           name: compose
           command: |
             set -x
+            cd ~/foodsaving-docker
             ~/env/bin/docker-compose up -d
       - run:
           name: Run backend tests
